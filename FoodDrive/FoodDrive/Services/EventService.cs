@@ -1,9 +1,11 @@
 ﻿using FoodDrive.Context;
 using FoodDrive.Models;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -26,6 +28,10 @@ namespace FoodDrive.Services
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 WriteIndented = true
             };
+        }
+        public async Task<Event> GetEventAsync(string id)
+        {
+            return await Task.FromResult(events.FirstOrDefault(s => s.Id == id));
         }
         public async Task<IEnumerable<Event>> GetItemsAsync(bool forceRefresh = false)
         {

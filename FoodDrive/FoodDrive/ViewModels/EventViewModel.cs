@@ -1,5 +1,6 @@
 ﻿using FoodDrive.Models;
 using FoodDrive.Services;
+using FoodDrive.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -58,7 +59,10 @@ namespace FoodDrive.ViewModels
         }
         private async void OnEventSelected(Event item)
         {
-            // get ready
+            if (item == null)
+                return;
+            // go to detail page and pass parameter
+            await Shell.Current.GoToAsync($"{nameof(EventDetailPage)}?{nameof(EventDetailViewModel.EventId)}={item.Id}");
         }
         public void OnAppearing()
         {

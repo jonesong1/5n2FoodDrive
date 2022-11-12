@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using MongoDB.Bson.Serialization.IdGenerators;
 
 namespace FoodDrive.Models
 {
@@ -12,7 +13,9 @@ namespace FoodDrive.Models
     {
         [JsonPropertyName("_id")]
         [BsonElement("_id")]
-        public ObjectId Id { get; set; }
+        [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
         
         [JsonPropertyName("title")]
         [BsonElement("title")]
