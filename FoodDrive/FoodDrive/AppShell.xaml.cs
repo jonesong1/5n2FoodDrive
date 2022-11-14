@@ -16,6 +16,7 @@ namespace FoodDrive
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
+            await App.UserManager.Logout();
             await Shell.Current.GoToAsync("//LoginPage");
         }
     }

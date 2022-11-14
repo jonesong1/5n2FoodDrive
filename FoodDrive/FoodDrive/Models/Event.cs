@@ -28,7 +28,7 @@ namespace FoodDrive.Models
         [JsonPropertyName("priority")]
         [BsonElement("priority")]
         public string Priority { get; set; }
-
+        
         [JsonPropertyName("created_by")]
         [BsonElement("created_by")]
         public ObjectId CreatedBy { get; set; }
@@ -45,8 +45,8 @@ namespace FoodDrive.Models
         [BsonElement("is_active")]
         public Boolean? IsActive { get; set; }
 
-        [JsonPropertyName("from_street1")]
-        [BsonElement("from_street1")]
+        [JsonPropertyName("from_street")]
+        [BsonElement("from_street")]
         public string FromStreet { get; set; }
 
         [JsonPropertyName("from_postalcode")]
@@ -61,8 +61,8 @@ namespace FoodDrive.Models
         [BsonElement("from_country")]
         public string FromCountry { get; set; }
 
-        [JsonPropertyName("to_street1")]
-        [BsonElement("to_street1")]
+        [JsonPropertyName("to_street")]
+        [BsonElement("to_street")]
         public string ToStreet { get; set; }
 
         [JsonPropertyName("to_postalcode")]
@@ -83,5 +83,11 @@ namespace FoodDrive.Models
         [JsonPropertyName("updated_at")]
         [BsonElement("updated_at")]
         public DateTime? UpdatedAt { get; set; }
+        [JsonPropertyName("__v")]
+        [BsonElement("__v")]
+        public double Version { get; set; }
+        [JsonPropertyName("assigned_rescuer")]
+        [BsonElement("assigned_rescuer")]
+        public string AssignUser { get; set; }
     }
 }

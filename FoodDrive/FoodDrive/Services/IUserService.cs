@@ -10,5 +10,8 @@ namespace FoodDrive.Services
     {
         bool UserExists(List<User> users, string email, string password);
         Task<bool> Login(string email, string password);
+        string GetToken();
+        string GetUserId();
+        Task Logout();
     }
 }

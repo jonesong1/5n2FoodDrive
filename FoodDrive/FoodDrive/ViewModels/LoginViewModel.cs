@@ -23,11 +23,11 @@ namespace FoodDrive.ViewModels
             {
                 // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
                 Application.Current.MainPage = new AppShell();
-                await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+                await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert("Error", "User is not valid", "Ok");
+                await App.Current.MainPage.DisplayAlert("Error", "Credentials are not valid", "Ok");
             }
         }
     }

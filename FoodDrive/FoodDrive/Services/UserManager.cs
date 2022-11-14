@@ -16,5 +16,17 @@ namespace FoodDrive.Services
         {
             return userService.Login(email, password);
         }
+        public string GetToken()
+        {
+            return userService.GetToken();
+        }
+        public string GetUserId()
+        {
+            return userService.GetUserId();
+        }
+        public Task Logout()
+        {
+            return userService.Logout();
+        }
     }
 }

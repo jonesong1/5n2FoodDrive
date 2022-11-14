@@ -10,5 +10,6 @@ namespace FoodDrive.Services
     {
         Task<T> GetEventAsync(string id);
         Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false);
+        Task<IEnumerable<T>> GetMyItemsAsync(bool forceRefresh = false);
     }
 }

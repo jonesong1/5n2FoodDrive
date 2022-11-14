@@ -42,5 +42,8 @@ namespace FoodDrive.Models
         [JsonPropertyName("updated_at")]
         [BsonElement("updated_at")]
         public DateTime? UpdatedAt { get; set; }
+        [JsonPropertyName("__v")]
+        [BsonElement("__v")]
+        public double Version { get; set; }
     }
 }

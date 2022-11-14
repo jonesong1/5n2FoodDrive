@@ -54,15 +54,6 @@ namespace FoodDrive.ViewModels
         {
             this.myMap = myMap;
             _geoCoder = new Geocoder();
-            //Pin pinNewYork = new Pin()
-            //{
-            //    Type = PinType.Place,
-            //    Label = "Central Park NYC",
-            //    Address = "New York City, NY 10022",
-            //    Position = new Position(40.78d, -73.96d),
-            //};
-            //myMap.Pins.Add(pinNewYork);
-            //myMap.MoveToRegion(MapSpan.FromCenterAndRadius(pinNewYork.Position, Distance.FromMeters(5000)));
         }
         public async void LoadEventId(string eventId)
         {
