@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -36,6 +37,39 @@ namespace FoodDrive.Services
         public async Task<Event> GetEventAsync(string id)
         {
             return await Task.FromResult(events.FirstOrDefault(s => s.Id == id));
+        }
+        public async Task<List<Event>> GetEventsAsync()
+        {
+            return await Task.FromResult(events);
+        }
+        public async Task<bool> PostEventAsync(string eventId)
+        {
+            string test = "636fad6d30cceb6d44a3c7f3";
+            var stringContent = new StringContent(string.Empty);
+            //stringContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/x-www-form-urlencoded");
+            stringContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            var content = new StringContent(string.Empty, Encoding.UTF8, "application/json");
+            //client.Headers.Add(HttpRequestHeader.ContentType, "application/json; charset=utf-8");
+            //Uri uri = new Uri(string.Format(EventContext.RestUrl +"/" + test + "/join", string.Empty));
+            Uri uri = new Uri(string.Format(TestContext.RestUrl, string.Empty));
+            var builder = new UriBuilder(new Uri(TestContext.RestUrl));
+
+            try
+            {
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, builder.Uri);
+                request.Content = new StringContent(string.Empty, Encoding.UTF8, "application/json");//CONTENT-TYPE header
+                HttpResponseMessage response = await client.SendAsync(request);
+                //HttpResponseMessage response = await client.PostAsync(uri, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return false;
         }
         public async Task<IEnumerable<Event>> GetItemsAsync(bool forceRefresh = false)
         {

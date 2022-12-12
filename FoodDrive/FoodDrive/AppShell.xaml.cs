@@ -12,6 +12,8 @@ namespace FoodDrive
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(EventDetailPage), typeof(EventDetailPage));
+            Routing.RegisterRoute(nameof(EventDetailPageNoToolbar), typeof(EventDetailPageNoToolbar));
+            Routing.RegisterRoute(nameof(EventMapPage), typeof(EventMapPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

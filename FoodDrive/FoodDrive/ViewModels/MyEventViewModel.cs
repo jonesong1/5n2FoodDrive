@@ -60,7 +60,7 @@ namespace FoodDrive.ViewModels
             if (item == null)
                 return;
             // go to detail page and pass parameter
-            await Shell.Current.GoToAsync($"{nameof(EventDetailPage)}?{nameof(EventDetailViewModel.EventId)}={item.Id}");
+            await Shell.Current.GoToAsync($"{nameof(EventDetailPageNoToolbar)}?{nameof(EventDetailViewModel.EventId)}={item.Id}");
         }
         public void OnAppearing()
         {

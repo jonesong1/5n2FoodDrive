@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -23,6 +24,7 @@ namespace FoodDrive.ViewModels
         private Geocoder _geoCoder;
         private Xamarin.Forms.Maps.Map myMap;
         private Position position;
+        public Command SaveEventCommand { get; }
         public string Name
         {
             get => name;
@@ -54,6 +56,19 @@ namespace FoodDrive.ViewModels
         {
             this.myMap = myMap;
             _geoCoder = new Geocoder();
+            SaveEventCommand = new Command(OnSaveEvent);
+        }
+        private async void OnSaveEvent(object obj)
+        {
+            var saveEvent = await DataStore.PostEventAsync(EventId);
+            if (saveEvent)
+            {
+                await App.Current.MainPage.DisplayAlert("Alert", Name + "is saved in your favorite", "OK");
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Alert", "Error, please try again", "OK");
+            }
         }
         public async void LoadEventId(string eventId)
         {
@@ -66,7 +81,37 @@ namespace FoodDrive.ViewModels
                 IEnumerable<Position> approximateLocations = await _geoCoder.GetPositionsForAddressAsync(Address);
                 //var approximateLocations = await _geoCoder.GetPositionsForAddressAsync(Address);
                 position = approximateLocations.FirstOrDefault();
-                LoadMap();
+                var Address2 = item.ToStreet + ", " + item.ToCity;
+                IEnumerable< Position > approximateLocations2 = await _geoCoder.GetPositionsForAddressAsync(Address2);
+                var position2 = approximateLocations2.FirstOrDefault();
+                //LoadMap();
+                Pin pinFromLoc = new Pin()
+                {
+                    Type = PinType.Place,
+                    Label = "Pick up location",
+                    Address = Address,
+                    Position = position,
+                };
+                myMap.Pins.Add(pinFromLoc);
+                Pin pinToLoc = new Pin()
+                {
+                    Type = PinType.Place,
+                    Label = "Drop off location",
+                    Address = Address2,
+                    Position = position2,
+                };
+                myMap.Pins.Add(pinToLoc);
+                Polyline polyline = new Polyline
+                {
+                    StrokeColor = Color.Blue,
+                    StrokeWidth = 12
+
+                };
+                // add the polyline to the map's MapElements collection
+                polyline.Geopath.Add(pinFromLoc.Position);
+                polyline.Geopath.Add(pinToLoc.Position);
+                myMap.MapElements.Add(polyline);
+                myMap.MoveToRegion(MapSpan.FromCenterAndRadius(pinFromLoc.Position, Distance.FromMeters(4000)));
             }
             catch (Exception ex)
             {

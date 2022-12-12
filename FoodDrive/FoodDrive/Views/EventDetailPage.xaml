@@ -5,7 +5,7 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
     
     <!--<ContentPage.ToolbarItems>
-        <ToolbarItem Text="Rescue Event" />
+        <ToolbarItem Text="Rescue Event" Command="{Binding SaveEventCommand}"/>
     </ContentPage.ToolbarItems>-->
     
     <ContentPage.Content>

@@ -8,7 +8,7 @@
              x:Name="BrowseEventPage">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Map" />
+        <ToolbarItem Text="Map View" Command="{Binding AddEventCommand}" />
     </ContentPage.ToolbarItems>
 
     <RefreshView x:DataType="local:EventViewModel" Command="{Binding LoadEventsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">

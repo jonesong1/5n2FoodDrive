@@ -55,7 +55,8 @@ namespace FoodDrive.ViewModels
         }
         private async void OnAddEvent(object obj)
         {
-            // get ready
+            // call event map page to view map
+            await Shell.Current.GoToAsync(nameof(EventMapPage));
         }
         private async void OnEventSelected(Event item)
         {
